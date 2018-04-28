@@ -1,0 +1,3 @@
+web-server:
+  hosts:
+    ec2-user:
