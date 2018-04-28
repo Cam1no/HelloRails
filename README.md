@@ -31,3 +31,12 @@ $ terraform plan -var-file="config.tfvars"
 $ terraform apply -var-file="config.tfvars"
 $ terraform destroy -var-file="config.tfvars"
 ```
+
+
+# 参考
+
+## AWSでネットワーク構築
+https://qiita.com/naoki_mochizuki/items/f795fe3e661a3349a7ce
+
+## TerraformとAWSを同時入門する
+https://qiita.com/litencatt/items/8da20374def6320a014b
