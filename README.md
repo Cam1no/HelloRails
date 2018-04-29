@@ -32,6 +32,13 @@ $ terraform apply -var-file="config.tfvars"
 $ terraform destroy -var-file="config.tfvars"
 ```
 
+# Ansible
+## 実行方法
+```
+$ cd ./ansible
+$ ansible-playbook -i inventory.yml site.yml
+```
+
 
 # 参考
 
@@ -40,3 +47,6 @@ https://qiita.com/naoki_mochizuki/items/f795fe3e661a3349a7ce
 
 ## TerraformとAWSを同時入門する
 https://qiita.com/litencatt/items/8da20374def6320a014b
+
+## Ansibleのplaybookで使用できるアトリビュートの一覧
+https://qiita.com/yunano/items/8494e785390360011a88
