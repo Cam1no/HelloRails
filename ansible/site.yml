@@ -1,0 +1,11 @@
+---
+- name: Install Rails Server
+  hosts: ec2-user
+  become: yes
+  become_user: root
+  pre_tasks:
+    - name: yum update
+      command: yum update -y
+  tasks:
+    - name: helloWorld
+      command: echo 'Hello'
