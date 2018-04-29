@@ -6,6 +6,5 @@
   pre_tasks:
     - name: yum update
       command: yum update -y
-  tasks:
-    - name: helloWorld
-      command: echo 'Hello'
+  roles:
+    - common

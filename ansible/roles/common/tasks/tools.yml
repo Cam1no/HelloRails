@@ -1,0 +1,6 @@
+---
+- name: Install Tools
+  yum: name={{ item }} state=latest update_cache=true
+  with_items:
+    - vim
+    - jq
