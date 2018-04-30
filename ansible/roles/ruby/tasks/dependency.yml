@@ -1,0 +1,12 @@
+---
+- name: Dependency Packages
+  yum: name={{ item }} state=latest update_cache=true
+  with_items:
+    - gcc-c++
+    - glibc-headers
+    - openssl-devel
+    - readline
+    - libyaml-devel
+    - readline-devel
+    - zlib
+    - zlib-devel

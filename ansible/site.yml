@@ -8,3 +8,4 @@
       command: yum update -y
   roles:
     - common
+    - ruby
