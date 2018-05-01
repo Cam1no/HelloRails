@@ -2,6 +2,7 @@
 - name: Dependency Packages
   yum: name={{ item }} state=latest update_cache=true
   with_items:
+    - gcc
     - gcc-c++
     - glibc-headers
     - openssl-devel
