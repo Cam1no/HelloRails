@@ -4,3 +4,31 @@
     repo: "{{ rbenv_repo }}"
     dest: "{{ rbenv_dest }}"
     version: "{{ rbenv_version }}"
+
+- name: shimsディレクトリの作成
+  file:
+    name: /usr/local/rbenv/shims
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: versionsディレクトリの作成
+  file:
+    name: /usr/local/rbenv/versions
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: rbenvにPATHを通すためのshellを設置
+  copy:
+    src: etc/profile.d/rbenv.sh
+    dest: /etc/profile.d/rbenv.sh
+    mode: 0644
+
+- name: ruby-buildのインストール
+  git:
+    repo: "{{ ruby_build_repo }}"
+    dest: "{{ rbenv_dest }}/plugins/ruby-build"
+    version: "{{ ruby_build_version }}"
