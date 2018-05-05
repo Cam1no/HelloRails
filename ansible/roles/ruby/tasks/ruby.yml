@@ -1,13 +1,24 @@
----
-- name: 対象のバージョンがインストール済みかチェック
-  command: rbenv versions
+# https://qiita.com/isobecky74/items/8da462a4a3b6f41b5a49
+- name: Check rbenv version
+  command: bash -lc "rbenv versions | grep {{ ruby_version }}"
   register: rbenv_check_install
   changed_when: False
   ignore_errors: yes
 
-- name: rubyのインストール
-  command: rbenv install {{ ruby_version }}
-  when: rbenv_check_install.stdout_lines.count("{{ ruby_version }}")
+- name: install ruby
+  command: bash -lc "rbenv install -v {{ ruby_version }}"
+  when: rbenv_check_install is failed
 
-- name: 対象rubyバージョンの有効化
-  command: rbenv global {{ ruby_version }} && rbenv rehash
+- name: rbenv rehash
+  command: bash -lc "rbenv rehash {{ ruby_version }}"
+  when: rbenv_check_install is failed
+
+- name: Check ruby version
+  command: bash -lc "rbenv version | grep {{ ruby_version }}"
+  register: rbenv_check_default
+  changed_when: False
+  ignore_errors: yes
+
+- name: Set default ruby version
+  command: bash -lc "rbenv global {{ ruby_version }}"
+  when: rbenv_check_default is failed
