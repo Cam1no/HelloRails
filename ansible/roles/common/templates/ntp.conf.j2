@@ -1,0 +1,12 @@
+statsdir /var/log/ntpstats/
+statistics loopstats peerstats clockstats
+filegen loopstats file loopstats type day enable
+filegen peerstats file peerstats type day enable
+filegen clockstats file clockstats type day enable
+pool ntp1.sakura.ad.jp iburst
+pool ntp.jst.mfeed.ad.jp iburst
+restrict -4 default kod notrap nomodify nopeer noquery limited
+restrict -6 default kod notrap nomodify nopeer noquery limited
+restrict 127.0.0.1
+restrict ::1
+restrict source notrap nomodify noquery

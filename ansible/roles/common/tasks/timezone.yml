@@ -1,0 +1,4 @@
+---
+- name: timezoneをAsia/Tokyoに変更
+  timezone:
+    name: Asia/Tokyo

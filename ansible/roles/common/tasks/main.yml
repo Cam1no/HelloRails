@@ -1,2 +1,4 @@
 ---
+- import_tasks: timezone.yml
 - import_tasks: tools.yml
+- import_tasks: ntp.yml
