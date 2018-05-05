@@ -1,0 +1,13 @@
+---
+- name: 対象のバージョンがインストール済みかチェック
+  command: rbenv versions
+  register: rbenv_check_install
+  changed_when: False
+  ignore_errors: yes
+
+- name: rubyのインストール
+  command: rbenv install {{ ruby_version }}
+  when: rbenv_check_install.stdout_lines.count("{{ ruby_version }}")
+
+- name: 対象rubyバージョンの有効化
+  command: rbenv global {{ ruby_version }} && rbenv rehash

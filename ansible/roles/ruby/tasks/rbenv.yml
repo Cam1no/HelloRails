@@ -21,13 +21,21 @@
     group: root
     mode: 0755
 
+- name: pluginsディレクトリの作成
+  file:
+    name: /usr/local/rbenv/plugins
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
 - name: rbenvにPATHを通すためのshellを設置
   copy:
     src: etc/profile.d/rbenv.sh
     dest: /etc/profile.d/rbenv.sh
     mode: 0644
 
-- name: ruby-buildのインストール
+- name: ruby-buildのclone
   git:
     repo: "{{ ruby_build_repo }}"
     dest: "{{ rbenv_dest }}/plugins/ruby-build"
