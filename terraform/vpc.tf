@@ -24,15 +24,15 @@ resource "aws_subnet" "vpc-1-public-subnet" {
 }
 
 # private subnet構築
-resource "aws_subnet" "vpc-1-private-subnet" {
-  vpc_id            = "${aws_vpc.vpc-1.id}"
-  cidr_block        = "10.0.2.0/24"
-  availability_zone = "ap-northeast-1a"
-
-  tags {
-    Name = "vpc-1-private-subnet"
-  }
-}
+# resource "aws_subnet" "vpc-1-private-subnet" {
+#   vpc_id            = "${aws_vpc.vpc-1.id}"
+#   cidr_block        = "10.0.2.0/24"
+#   availability_zone = "ap-northeast-1a"
+#
+#   tags {
+#     Name = "vpc-1-private-subnet"
+#   }
+# }
 
 # internet gateway構築
 resource "aws_internet_gateway" "vpc-1-igw" {
@@ -77,23 +77,23 @@ resource "aws_nat_gateway" "nat" {
 # インターネットからPrivateへの接続は禁止
 # Private SubnetからのリクエストはNAT Gatewayで置換してリクエスト
 # インターネットからPrivate Subnetに接続する場合は、NAT Gatewayで置換して接続
-resource "aws_route_table" "vpc-1-private-rt" {
-  vpc_id = "${aws_vpc.vpc-1.id}"
-
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = "${aws_nat_gateway.nat.id}"
-  }
-
-  tags {
-    Name = "vpc-1-private-rt"
-  }
-}
-
-resource "aws_route_table_association" "vpc-1-rta-2" {
-  subnet_id      = "${aws_subnet.vpc-1-private-subnet.id}"
-  route_table_id = "${aws_route_table.vpc-1-private-rt.id}"
-}
+# resource "aws_route_table" "vpc-1-private-rt" {
+#   vpc_id = "${aws_vpc.vpc-1.id}"
+#
+#   route {
+#     cidr_block = "0.0.0.0/0"
+#     gateway_id = "${aws_nat_gateway.nat.id}"
+#   }
+#
+#   tags {
+#     Name = "vpc-1-private-rt"
+#   }
+# }
+#
+# resource "aws_route_table_association" "vpc-1-rta-2" {
+#   subnet_id      = "${aws_subnet.vpc-1-private-subnet.id}"
+#   route_table_id = "${aws_route_table.vpc-1-private-rt.id}"
+# }
 
 # web serverのセキュリティーグループ
 resource "aws_security_group" "web-sg" {
@@ -129,41 +129,41 @@ resource "aws_security_group" "web-sg" {
 }
 
 # DB Server用セキュリティーグループ
-resource "aws_security_group" "db-sg" {
-  name   = "db-sg"
-  vpc_id = "${aws_vpc.vpc-1.id}"
-
-  # SSHできるように22番ポート開放
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  # MySQLに接続するための3306番ポート開放
-  ingress {
-    from_port   = 3306
-    to_port     = 3306
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port   = 8
-    to_port     = 0
-    protocol    = "icmp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags {
-    Name = "db-sg"
-  }
-}
+# resource "aws_security_group" "db-sg" {
+#   name   = "db-sg"
+#   vpc_id = "${aws_vpc.vpc-1.id}"
+#
+#   # SSHできるように22番ポート開放
+#   ingress {
+#     from_port   = 22
+#     to_port     = 22
+#     protocol    = "tcp"
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
+#
+#   # MySQLに接続するための3306番ポート開放
+#   ingress {
+#     from_port   = 3306
+#     to_port     = 3306
+#     protocol    = "tcp"
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
+#
+#   ingress {
+#     from_port   = 8
+#     to_port     = 0
+#     protocol    = "icmp"
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
+#
+#   egress {
+#     from_port   = 0
+#     to_port     = 0
+#     protocol    = "-1"
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
+#
+#   tags {
+#     Name = "db-sg"
+#   }
+# }
