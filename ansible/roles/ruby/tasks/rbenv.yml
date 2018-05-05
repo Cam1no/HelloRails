@@ -1,0 +1,6 @@
+---
+- name: git clone rbenv
+  git:
+    repo: "{{ rbenv_repo }}"
+    dest: "{{ rbenv_dest }}"
+    version: "{{ rbenv_version }}"

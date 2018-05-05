@@ -1,0 +1,10 @@
+---
+# rbenv
+rbenv_repo: https://github.com/rbenv/rbenv.git
+rbenv_dest: /usr/local/rbenv
+rbenv_version: v1.1.1
+ruby_build_repo: https://github.com/rbenv/ruby-build.git
+ruby_build_version: v20170726
+
+# ruby
+ruby_version: 2.4.1
