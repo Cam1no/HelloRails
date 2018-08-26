@@ -28,7 +28,7 @@ resource "aws_subnet" "vpc-1-public-subnet" {
 #   vpc_id            = "${aws_vpc.vpc-1.id}"
 #   cidr_block        = "10.0.2.0/24"
 #   availability_zone = "ap-northeast-1a"
-#
+
 #   tags {
 #     Name = "vpc-1-private-subnet"
 #   }
@@ -108,7 +108,7 @@ resource "aws_security_group" "web-sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  # HTTPリクエストできるように280番ポート開放
+  # HTTPリクエストできるように80番ポート開放
   ingress {
     from_port   = 80
     to_port     = 80
