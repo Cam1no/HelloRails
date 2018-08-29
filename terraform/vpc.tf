@@ -45,6 +45,7 @@ resource "aws_internet_gateway" "vpc-1-igw" {
 
 # publicはこのままだと、10.0.0.0/16の宛先のパケットは全て破棄されてしまう
 # 0.0.0.0/0の範囲、つまり全ての宛先のパケットは、internet gatewayに転送する
+# https://docs.aws.amazon.com/ja_jp/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html
 resource "aws_route_table" "vpc-1-public-rt" {
   vpc_id = "${aws_vpc.vpc-1.id}"
 
@@ -65,14 +66,14 @@ resource "aws_route_table_association" "vpc-1-rta-1" {
 }
 
 # NATの構築
-resource "aws_eip" "nat" {
-  vpc = true
-}
+# resource "aws_eip" "nat" {
+#   vpc = true
+# }
 
-resource "aws_nat_gateway" "nat" {
-  allocation_id = "${aws_eip.nat.id}"
-  subnet_id     = "${aws_subnet.vpc-1-public-subnet.id}"
-}
+# resource "aws_nat_gateway" "nat" {
+#   allocation_id = "${aws_eip.nat.id}"
+#   subnet_id     = "${aws_subnet.vpc-1-public-subnet.id}"
+# }
 
 # インターネットからPrivateへの接続は禁止
 # Private SubnetからのリクエストはNAT Gatewayで置換してリクエスト
