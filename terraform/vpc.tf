@@ -1,6 +1,8 @@
 # 参考
 # https://www.terraform.io/docs/providers/aws/
 
+# VPCとpublic subnet 一つ作るためのコード
+
 # VPC構築
 resource "aws_vpc" "vpc-1" {
   cidr_block           = "10.0.0.0/16"
